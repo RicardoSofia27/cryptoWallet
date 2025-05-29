@@ -1,6 +1,5 @@
 package com.walletmanagement.crypto.schedule;
 
-import com.walletmanagement.crypto.entity.Asset;
 import com.walletmanagement.crypto.repository.AssetRepository;
 import com.walletmanagement.crypto.service.CoinCapServiceWithReactive;
 import jakarta.inject.Inject;
@@ -28,8 +27,8 @@ public class AssetPriceScheduled {
     @Scheduled(cron = "${crypto.asset.cron1}")
     public void updateAssetValue() {
         final var assetList = assetRepository.findAll();
-        assetList.doOnNext(asset -> executorService.submit(
-            () -> coinCapServiceWithReactive.getAssetBySymbolAndSaveIt(asset.getSymbol()))).subscribe();
+        assetList.forEach(asset -> executorService.submit(
+            () -> coinCapServiceWithReactive.getAssetBySymbolAndSaveIt(asset.getSymbol())));
     }
 
 }

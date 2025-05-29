@@ -1,6 +1,5 @@
 package com.walletmanagement.crypto.dto;
 
-import com.walletmanagement.crypto.entity.Asset;
 import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Getter;

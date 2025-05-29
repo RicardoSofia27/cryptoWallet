@@ -28,15 +28,8 @@ public class AssetService {
     }
 
     public Asset saveAsset(final Asset asset) {
-        return assetRepository.save(asset).block();
+        return assetRepository.save(asset);
     }
 
-    public void saveAllAssets() {
-
-    }
-
-    public void evaluateAssetListByDate() {
-
-    }
 
 }
