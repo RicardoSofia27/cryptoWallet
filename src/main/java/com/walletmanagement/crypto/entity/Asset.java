@@ -21,7 +21,7 @@ import lombok.Setter;
 @Builder
 @Setter
 @Getter
-@Table(name = "asset")
+@Table(name = "assets")
 public class Asset {
 
     @Id

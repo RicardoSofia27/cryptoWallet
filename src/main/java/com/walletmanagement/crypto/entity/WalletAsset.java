@@ -1,5 +1,6 @@
 package com.walletmanagement.crypto.entity;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,11 +14,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
-@Entity
-@Table(name = "wallet_asset")
+
 @Getter
 @Setter
 @Builder
+@Table(name = "wallet_asset")
+@Entity
 public class WalletAsset {
 
     @Id

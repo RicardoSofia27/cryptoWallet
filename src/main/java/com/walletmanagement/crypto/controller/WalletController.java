@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("wallet")
+@RequestMapping("/wallet")
 public class WalletController {
 
     private static final Logger logger = Logger.getLogger("WalletController");
@@ -31,28 +31,33 @@ public class WalletController {
     }
 
     @PostMapping
-    @RequestMapping("create")
+    @RequestMapping("/create")
     public ResponseEntity<Wallet> createWallet(@RequestParam("email") final String email)
         throws ValidationException {
         logger.log(Level.INFO, "");
-        return ResponseEntity.ok(walletService.createWallet(email));
+
+        try{
+            return ResponseEntity.ok(walletService.createWallet(email));
+        } catch (final ValidationException ex) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @PostMapping
-    @RequestMapping("addAsset")
+    @RequestMapping("/addAsset")
     public void addAssetToWallet(@RequestParam("email") final String email,
         @RequestParam("asset") final AssetData asset) throws NoSuchElementException {
         walletService.addAssetToWallet(email, asset);
     }
 
     @GetMapping
-    @RequestMapping("show")
-    public ResponseEntity<Wallet> showWallet(@RequestParam("email") final String email) {
+    @RequestMapping("/show")
+    public ResponseEntity<Wallet> showWallet(@RequestParam("email") final String email) throws NoSuchElementException{
         return ResponseEntity.ok(walletService.getWallet(email));
     }
 
     @GetMapping
-    @RequestMapping("simulateValue")
+    @RequestMapping("/simulateValue")
     public ResponseEntity<WalletSimulationDTO> simulateWalletValue(
         @RequestParam("assets") final List<AssetData> assetList) {
         return ResponseEntity.ok(walletService.simulateWalletValue(assetList));
