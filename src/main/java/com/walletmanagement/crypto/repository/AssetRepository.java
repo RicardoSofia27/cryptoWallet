@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AssetRepository extends JpaRepository<Asset, Integer> {
+public interface AssetRepository extends JpaRepository<Asset, Long> {
 
     Optional<Asset> getAssetBySymbol(final String symbol);
 }
